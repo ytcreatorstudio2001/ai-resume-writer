@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Resume Writer</title>
+</head>
+<body>
+    <h1>AI Resume Writer</h1>
+    <form action="/generate_resume" method="POST">
+        <label for="user_input">Enter Your Information:</label><br>
+        <textarea id="user_input" name="user_input" rows="5" cols="50"></textarea><br>
+        <button type="submit">Generate Resume</button>
+    </form>
+
+    <h2>Your Generated Resume:</h2>
+    <div id="resume"></div>
+
+    <script>
+        const form = document.querySelector('form');
+        form.onsubmit = async (event) => {
+            event.preventDefault();
+            const userInput = document.getElementById('user_input').value;
+            const response = await fetch('/generate_resume', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/x-www-form-urlencoded'
+                },
+                body: new URLSearchParams({
+                    'user_input': userInput
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById('resume').innerText = data.resume;
+        }
+    </script>
+</body>
+</html>
