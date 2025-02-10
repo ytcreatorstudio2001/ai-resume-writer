@@ -25,4 +25,5 @@ def generate_resume():
     return jsonify({"resume": resume})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # Make sure to run on port 8000 as required by Koyeb
+    app.run(host='0.0.0.0', port=8000, debug=True)
