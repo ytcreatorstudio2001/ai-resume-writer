@@ -3,8 +3,8 @@ import openai
 
 app = Flask(__name__)
 
-# Your OpenAI API key (you can store this securely later)
-openai.api_key = 'your_openai_api_key'
+# Your OpenAI API key (get your API key from OpenAI)
+openai.api_key = 'your-openai-api-key'
 
 @app.route('/')
 def home():
@@ -13,8 +13,8 @@ def home():
 @app.route('/generate_resume', methods=['POST'])
 def generate_resume():
     user_input = request.form['user_input']
-    
-    # Call OpenAI GPT model to generate resume content
+
+    # Call OpenAI's GPT model to generate resume
     response = openai.Completion.create(
         engine="text-davinci-003",
         prompt=f"Create a professional resume with the following information: {user_input}",
